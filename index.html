@@ -1,0 +1,87 @@
+<!doctype HTML>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+</head>
+<!-- A-Frame ライブラリの読み込み -->
+<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+<!-- AR.js ライブラリの読み込み -->
+<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+<body style="margin : 0px; overflow: hidden">
+    <a-scene embedded arjs="debugUIEnabled: false" 
+        renderer="gammaOutput: true;" vr-mode-ui="enabled: false">
+        <a-asset>
+            <a-asset-item id="armodel0" src="model_obj/ghost.glb"></a-asset-item>
+            <a-asset-item id="armodel1" src="model_obj/ghost-sad.glb"></a-asset-item>
+            <a-asset-item id="armodel2" src="model_obj/ghost-fun.glb"></a-asset-item>
+            <a-asset-item id="armodel3" src="model_obj/ghost-angry.glb"></a-asset-item>
+        </a-asset>
+        <a-marker type="pattern" preset="hiro">
+            <a-entity id="model0" gltf-model="#armodel0" position="0 0.5 0" scale="0.3 0.3 0.3" rotation="0 270 90" visible="true">
+            </a-entity>
+            <a-entity id="model1" gltf-model="#armodel1" position="0 0.5 0" scale="0.3 0.3 0.3" rotation="0 90 270" visible="false">
+            </a-entity>
+            <a-entity id="model2" gltf-model="#armodel2" position="0 0.5 0" scale="0.3 0.3 0.3" rotation="0 90 270" visible="false">
+            </a-entity>
+            <a-entity id="model3" gltf-model="#armodel3" position="0 0.5 0" scale="0.3 0.3 0.3" rotation="0 90 270" visible="false">
+            </a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+    <div style="position: fixed; bottom: 150px;">
+        <input type="button" id="b1" value="哀しい" onclick="click1();">
+        <input type="button" id="b2" value="嬉しい" onclick="click2();">
+        <input type="button" id="b3" value="怒ってる" onclick="click3();">
+    </div>
+    <script>
+        function click1() {
+            console.log("click1");
+            var el0 = document.querySelector('#model0');
+            var el1 = document.querySelector('#model1');
+            var el2 = document.querySelector('#model2');
+            var el3 = document.querySelector('#model3');
+            if (!(el1.getAttribute('visible'))) {
+                el0.setAttribute('visible', false);
+                el1.setAttribute('visible', true);
+                el2.setAttribute('visible', false);
+                el3.setAttribute('visible', false);
+            } else {
+                el1.setAttribute('visible', false);
+                el0.setAttribute('visible', true);
+            }
+        }
+        function click2() {
+            console.log("click2");
+            var el0 = document.querySelector('#model0');
+            var el1 = document.querySelector('#model1');
+            var el2 = document.querySelector('#model2');
+            var el3 = document.querySelector('#model3');
+            if (!(el2.getAttribute('visible'))) {
+                el0.setAttribute('visible', false);
+                el1.setAttribute('visible', false);
+                el2.setAttribute('visible', true);
+                el3.setAttribute('visible', false);
+            } else {
+                el2.setAttribute('visible', false);
+                el0.setAttribute('visible', true);
+            }
+        }
+        function click3() {
+            console.log("click3");
+            var el0 = document.querySelector('#model0');
+            var el1 = document.querySelector('#model1');
+            var el2 = document.querySelector('#model2');
+            var el3 = document.querySelector('#model3');
+            if (!(el3.getAttribute('visible'))) {
+                el0.setAttribute('visible', false);
+                el1.setAttribute('visible', false);
+                el2.setAttribute('visible', false);
+                el3.setAttribute('visible', true);
+            } else {
+                el3.setAttribute('visible', false);
+                el0.setAttribute('visible', true);
+            }
+        }
+    </script>
+</body>
+</html>
